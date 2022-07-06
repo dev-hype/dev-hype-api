@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { PrismaModule } from './prisma/prisma.module'
 
 import { envSchema } from './env'
 
@@ -12,8 +11,9 @@ import { envSchema } from './env'
       isGlobal: true,
       validationSchema: envSchema,
     }),
+    PrismaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
