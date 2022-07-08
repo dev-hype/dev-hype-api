@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GqlCountry {
+  key: String!
+  name: String!
+}
+
+type GqlUser {
+  email: String!
+  id: String!
+}
+
+type Mutation {
+  login(email: String!, password: String!): String!
+  signup(email: String!, password: String!): String!
+}
+
+type Query {
+  countries: [GqlCountry!]!
+  me: GqlUser!
+}

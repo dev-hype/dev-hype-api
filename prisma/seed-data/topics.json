@@ -1,0 +1,536 @@
+{
+  "Web Development": [
+    {
+      "name": "Angular"
+    },
+    {
+      "name": "Angular.js"
+    },
+    {
+      "name": "ASP.NET"
+    },
+    {
+      "name": "ASP.NET Core"
+    },
+    {
+      "name": "Django"
+    },
+    {
+      "name": "Drupal"
+    },
+    {
+      "name": "Express"
+    },
+    {
+      "name": "FastAPI"
+    },
+    {
+      "name": "Flask"
+    },
+    {
+      "name": "Gatsby"
+    },
+    {
+      "name": "jQuery"
+    },
+    {
+      "name": "Laravel"
+    },
+    {
+      "name": "React.js"
+    },
+    {
+      "name": "Ruby on Rails"
+    },
+    {
+      "name": "Spring"
+    },
+    {
+      "name": "Svelte"
+    },
+    {
+      "name": "Symfony"
+    },
+    {
+      "name": "Vue.js"
+    },
+    {
+      "name": ".NET Framework"
+    },
+    {
+      "name": ".NET Core / .NET 5"
+    },
+    {
+      "name": "Apache Spark"
+    },
+    {
+      "name": "Hadoop"
+    },
+    {
+      "name": "Keras"
+    },
+    {
+      "name": "NumPy"
+    },
+    {
+      "name": "Pandas"
+    },
+    {
+      "name": "Qt"
+    },
+    {
+      "name": "Torch/PyTorch"
+    },
+    {
+      "name": "Next.js"
+    },
+    {
+      "name": "Nuxt.js"
+    },
+    {
+      "name": "Remix"
+    },
+    {
+      "name": "Wordpress"
+    },
+    {
+      "name": "Google Polymer"
+    },
+    {
+      "name": "D3.js"
+    },
+    {
+      "name": "p5.js"
+    },
+    {
+      "name": "Three.js"
+    },
+    {
+      "name": "Bootstrap"
+    },
+    {
+      "name": "Jasmine"
+    },
+    {
+      "name": "Mocha"
+    },
+    {
+      "name": "QUnit"
+    },
+    {
+      "name": "Unit.js"
+    },
+    {
+      "name": "Jest"
+    },
+    {
+      "name": "Backbone.js"
+    },
+    {
+      "name": "Ember.js"
+    },
+    {
+      "name": "Knockout"
+    },
+    {
+      "name": "Meteor"
+    },
+    {
+      "name": "TensorFlow"
+    }
+  ],
+  "Mobile Development": [
+    {
+      "name": "Flutter"
+    },
+    {
+      "name": "React Native"
+    },
+    {
+      "name": "Ionic"
+    },
+    {
+      "name": "Xamarin"
+    },
+    {
+      "name": "NativeScript"
+    },
+    {
+      "name": "Android"
+    },
+    {
+      "name": "IOS"
+    }
+  ],
+  "Data Science": [
+    {
+      "name": "Tensorflow"
+    },
+    {
+      "name": "PyTorch"
+    },
+    {
+      "name": "RapidMiner"
+    },
+    {
+      "name": "Alteryx"
+    },
+    {
+      "name": "Lumen Data"
+    },
+    {
+      "name": "SAS"
+    },
+    {
+      "name": "ApacheHadoop"
+    },
+    {
+      "name": "Tableau"
+    },
+    {
+      "name": "BigML"
+    },
+    {
+      "name": "Knime"
+    },
+    {
+      "name": "Excel"
+    },
+    {
+      "name": "ApacheFlink"
+    },
+    {
+      "name": "PowerBI"
+    },
+    {
+      "name": "DataRobot"
+    },
+    {
+      "name": "ApacheSpark"
+    },
+    {
+      "name": "SapHana"
+    },
+    {
+      "name": "Trifacta"
+    },
+    {
+      "name": "Minitab"
+    },
+    {
+      "name": "R"
+    },
+    {
+      "name": "ApacheKafka"
+    },
+    {
+      "name": "QlikView"
+    },
+    {
+      "name": "MicroStrategy"
+    },
+    {
+      "name": "GoogleAnalytics"
+    },
+    {
+      "name": "SPSS"
+    },
+    {
+      "name": "MATLAB"
+    }
+  ],
+  "Cloud Computing": [
+    {
+      "name": "Alibaba Cloud"
+    },
+    {
+      "name": "Amazon Web Services"
+    },
+    {
+      "name": "Apache CloudStack"
+    },
+    {
+      "name": "Cisco Unified Computing System"
+    },
+    {
+      "name": "DigitalOcean"
+    },
+    {
+      "name": "Fastly"
+    },
+    {
+      "name": "Google Cloud"
+    },
+    {
+      "name": "Heroku"
+    },
+    {
+      "name": "HP Cloud"
+    },
+    {
+      "name": "IBM Cloud"
+    },
+    {
+      "name": "Microsoft Azure"
+    },
+    {
+      "name": "Netlify"
+    },
+    {
+      "name": "OpenShift"
+    },
+    {
+      "name": "Oracle Cloud"
+    },
+    {
+      "name": "SAP Cloud Platform"
+    }
+  ],
+  "Databases": [
+    {
+      "name": "Microsoft Access"
+    },
+    {
+      "name": "Airtable"
+    },
+    {
+      "name": "Amazon Aurora"
+    },
+    {
+      "name": "CockroachDB"
+    },
+    {
+      "name": "Derby"
+    },
+    {
+      "name": "FrontBase"
+    },
+    {
+      "name": "Greenplum"
+    },
+    {
+      "name": "Helix"
+    },
+    {
+      "name": "IBM DB2"
+    },
+    {
+      "name": "MariaDB"
+    },
+    {
+      "name": "MaxDB"
+    },
+    {
+      "name": "Microsoft SQL Server"
+    },
+    {
+      "name": "SQL Azure"
+    },
+    {
+      "name": "MonetDB"
+    },
+    {
+      "name": "MySQL"
+    },
+    {
+      "name": "NexusDB"
+    },
+    {
+      "name": "Oracle"
+    },
+    {
+      "name": "PostgreSQL"
+    },
+    {
+      "name": "RethinkDB"
+    },
+    {
+      "name": "SAP HANA"
+    },
+    {
+      "name": "SQLite"
+    },
+    {
+      "name": "Elasticsearch"
+    },
+    {
+      "name": "Redis"
+    },
+    {
+      "name": "Cassandra"
+    },
+    {
+      "name": "Firebase"
+    },
+    {
+      "name": "MongoDB"
+    },
+    {
+      "name": "DynamoDB"
+    },
+    {
+      "name": "Couchbase"
+    }
+  ],
+  "Programming": [
+    {
+      "name": "Ansible"
+    },
+    {
+      "name": "Chef"
+    },
+    {
+      "name": "Deno"
+    },
+    {
+      "name": "Docker"
+    },
+    {
+      "name": "Flow"
+    },
+    {
+      "name": "Git"
+    },
+    {
+      "name": "Kubernetes"
+    },
+    {
+      "name": "Pulumi"
+    },
+    {
+      "name": "Puppet"
+    },
+    {
+      "name": "Terraform"
+    },
+    {
+      "name": "Unity 3D"
+    },
+    {
+      "name": "Unreal Engine"
+    },
+    {
+      "name": "Xamarin"
+    },
+    {
+      "name": "Yarn"
+    },
+    {
+      "name": "C++"
+    },
+    {
+      "name": "HTML"
+    },
+    {
+      "name": "CSS"
+    },
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "Objective-C"
+    },
+    {
+      "name": "PHP"
+    },
+    {
+      "name": "Swift"
+    },
+    {
+      "name": "Python"
+    },
+    {
+      "name": "Assembly"
+    },
+    {
+      "name": "C"
+    },
+    {
+      "name": "R"
+    },
+    {
+      "name": "Rust"
+    },
+    {
+      "name": "Julia"
+    },
+    {
+      "name": "TypeScript"
+    },
+    {
+      "name": "Bash/Shell"
+    },
+    {
+      "name": "SQL"
+    },
+    {
+      "name": "C#"
+    },
+    {
+      "name": "Java"
+    },
+    {
+      "name": "Node.js"
+    },
+    {
+      "name": "PowerShell"
+    },
+    {
+      "name": "Go"
+    },
+    {
+      "name": "Perl"
+    },
+    {
+      "name": "Ruby"
+    },
+    {
+      "name": "Haskell"
+    },
+    {
+      "name": "Clojure"
+    },
+    {
+      "name": "Matlab"
+    },
+    {
+      "name": "APL"
+    },
+    {
+      "name": "Kotlin"
+    },
+    {
+      "name": "F#"
+    },
+    {
+      "name": "Scala"
+    },
+    {
+      "name": "Delphi"
+    },
+    {
+      "name": "Dart"
+    },
+    {
+      "name": "Elixir"
+    },
+    {
+      "name": "VBA"
+    },
+    {
+      "name": "Groovy"
+    },
+    {
+      "name": "LISP"
+    },
+    {
+      "name": "Erlang"
+    },
+    {
+      "name": "Crystal"
+    },
+    {
+      "name": "COBOL"
+    }
+  ]
+}

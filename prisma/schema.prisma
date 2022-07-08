@@ -10,15 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id Int @id @default(autoincrement())
+// ==========================
+// ENUMS
 
-  email    String  @unique
-  githubId String? @unique
-  password String?
+enum WeekDay {
+  Mon
+  Tue
+  Wed
+  Thu
+  Fri
+  Sat
+  Sun
+}
+
+// ==========================
+// MODELS
+
+model User {
+  id String @id @default(uuid())
+
+  email     String   @unique
+  password  String?
+  githubId  String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   profile Profile?
 
+  Goal Goal[]
   @@map("users")
 }
 
@@ -30,8 +49,171 @@ model Profile {
   bio       String?
   avatar    String?
 
-  userId Int  @unique
-  user   User @relation(fields: [userId], references: [id])
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  countryCode String?
+  country     Country? @relation(fields: [countryCode], references: [key])
 
   @@map("profiles")
+}
+
+model Country {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+  key  String @unique
+
+  profiles Profile[]
+
+  @@map("countries")
+}
+
+model Field {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+
+  specializations Specialization[]
+
+  @@map("fields")
+}
+
+model Specialization {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+
+  fieldId Int
+  field   Field @relation(fields: [fieldId], references: [id])
+
+  topics Topic[]
+
+  @@map("specializations")
+}
+
+model Topic {
+  id Int @id @default(autoincrement())
+
+  name String
+
+  specializationId Int
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+
+  goals Goal[]
+
+  @@unique([name, specializationId])
+  @@map("topics")
+}
+
+model Resource {
+  id Int @id @default(autoincrement())
+
+  name   String  @unique
+  url    String
+  isFree Boolean
+
+  typeId Int
+  type   ResourceType @relation(fields: [typeId], references: [id])
+
+  milestones Milestone[]
+
+  @@map("resources")
+}
+
+model ResourceType {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  resources Resource[]
+
+  @@map("resourceTypes")
+}
+
+model Goal {
+  id Int @id @default(autoincrement())
+
+  name             String
+  startDate        DateTime
+  estimatedEndDate DateTime?
+  actualEndDate    DateTime?
+  isActive         Boolean   @default(false)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  topicId Int
+  topic   Topic @relation(fields: [topicId], references: [id])
+
+  milestones Milestone[]
+  projects   Project[]
+
+  @@map("goals")
+}
+
+model Milestone {
+  id Int @id @default(autoincrement())
+
+  name             String
+  startDate        DateTime
+  durationInHours  Int
+  estimatedEndDate DateTime
+  actualEndDate    DateTime?
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  goalId     Int
+  goal       Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
+  resourceId Int
+  resource   Resource @relation(fields: [resourceId], references: [id])
+
+  milestoneSchedules MilestoneSchedule[]
+  milestonesNotes    MilestoneNote[]
+
+  @@map("milestones")
+}
+
+model MilestoneSchedule {
+  id Int @id @default(autoincrement())
+
+  weekDay         WeekDay
+  durationInHours Int
+
+  milestoneId Int
+  milestone   Milestone @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+
+  @@map("milestoneSchedules")
+}
+
+model MilestoneNote {
+  id Int @id @default(autoincrement())
+
+  title     String
+  note      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  milestoneId Int
+  milestone   Milestone @relation(fields: [milestoneId], references: [id], onDelete: Cascade)
+
+  @@map("milestoneNotes")
+}
+
+model Project {
+  id Int @id @default(autoincrement())
+
+  name        String
+  description String
+  url         String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+
+  goalId Int
+  goal   Goal @relation(fields: [goalId], references: [id], onDelete: Cascade)
+
+  @@map("projects")
 }
