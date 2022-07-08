@@ -30,7 +30,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
 
       const { id, name, email, avatar_url } = res.data
 
-      const currentUser = await this.userService.getUser({
+      const currentUser = await this.userService.getUserWithProfile({
         githubId: id.toString(),
       })
 

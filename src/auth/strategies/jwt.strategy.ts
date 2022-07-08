@@ -11,10 +11,10 @@ import {
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(private userService: UserService, configService: ConfigService) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
       secretOrKey: configService.get('JWT_SECRET'),
       ignoreExpiration: false,
     } as StrategyOptions)
@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: any, done: VerifiedCallback) {
     const userId = payload.sub
 
-    const user = await this.userService.getUser({ id: Number(userId) })
+    const user = await this.userService.getUserById(userId)
 
     if (user) {
       return done(null, user)
