@@ -4,7 +4,7 @@ import { MiscService } from './misc.service'
 
 import { GqlCountry } from './models/country.model'
 
-@Resolver()
+@Resolver(() => GqlCountry)
 export class MiscResolver {
   constructor(private miscService: MiscService) {}
 

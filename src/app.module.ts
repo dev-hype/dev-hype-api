@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { MiscModule } from './misc/misc.module'
+import { FieldModule } from './field/field.module'
 
 import { envSchema } from './env'
 
@@ -26,8 +27,7 @@ import { envSchema } from './env'
     AuthModule,
     UserModule,
     MiscModule,
+    FieldModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

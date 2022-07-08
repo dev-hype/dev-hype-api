@@ -9,7 +9,7 @@ import { GqlJwtGuard } from 'src/auth/guards/jwt.guard'
 
 import { GqlUser } from './models/user.model'
 
-@Resolver()
+@Resolver(() => GqlUser)
 export class UserResolver {
   constructor(private userService: UserService) {}
 

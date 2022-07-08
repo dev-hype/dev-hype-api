@@ -7,6 +7,18 @@ type GqlCountry {
   name: String!
 }
 
+type GqlField {
+  id: Int!
+  name: String!
+  specializations: [GqlSpecialization!]!
+}
+
+type GqlSpecialization {
+  fieldId: Int!
+  id: Int!
+  name: String!
+}
+
 type GqlUser {
   email: String!
   id: String!
@@ -19,5 +31,6 @@ type Mutation {
 
 type Query {
   countries: [GqlCountry!]!
+  fields: [GqlField!]!
   me: GqlUser!
 }

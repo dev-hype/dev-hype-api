@@ -4,7 +4,7 @@ import { AuthService } from './auth.service'
 
 import { LocalAuthDto } from './dto/local-auth.dto'
 
-@Resolver()
+@Resolver(() => String)
 export class AuthResolver {
   constructor(private authService: AuthService) {}
 
