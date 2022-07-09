@@ -11,7 +11,7 @@ export const envSchema = Joi.object({
   DATABASE_URL: Joi.string().required(),
 
   // Auth
-  // JWT_SECRET: Joi.string().required(),
+  JWT_SECRET: Joi.string().required(),
   // GITHUB_AUTH_CLIENT_ID: Joi.string().required(),
   // GITHUB_AUTH_CLIENT_SECRET: Joi.string().required(),
 })

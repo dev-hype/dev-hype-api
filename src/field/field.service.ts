@@ -6,16 +6,20 @@ import { PrismaService } from 'src/prisma/prisma.service'
 export class FieldService {
   constructor(private prismaService: PrismaService) {}
 
-  async getFieldsWithSpecializations() {
+  async getFields() {
     return this.prismaService.field.findMany({
       include: { specializations: true },
     })
   }
 
-  async getFieldWithSpecializationsById(id: number) {
-    return this.prismaService.field.findUnique({
-      where: { id },
-      include: { specializations: true },
+  async getSpecializationTopics(id: number, search?: string) {
+    return this.prismaService.topic.findMany({
+      where: {
+        specializationId: id,
+        ...(search
+          ? { name: { mode: 'insensitive', contains: search.toLowerCase() } }
+          : {}),
+      },
     })
   }
 }

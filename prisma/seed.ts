@@ -1,10 +1,10 @@
 import { PrismaClient } from '@prisma/client'
 
-import countriesJSON from './seed-data/countries.json'
-import fieldsJSON from './seed-data/fields.json'
-import specializationsJSON from './seed-data/specializations.json'
-import topicsJSON from './seed-data/topics.json'
-import resourceTypesJSON from './seed-data/resource-types.json'
+import * as countriesJSON from './seed-data/countries.json'
+import * as fieldsJSON from './seed-data/fields.json'
+import * as specializationsJSON from './seed-data/specializations.json'
+import * as topicsJSON from './seed-data/topics.json'
+import * as resourceTypesJSON from './seed-data/resource-types.json'
 
 const prisma = new PrismaClient()
 

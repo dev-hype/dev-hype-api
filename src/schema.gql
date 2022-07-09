@@ -19,6 +19,12 @@ type GqlSpecialization {
   name: String!
 }
 
+type GqlTopic {
+  id: Int!
+  name: String!
+  specializationId: Int!
+}
+
 type GqlUser {
   email: String!
   id: String!
@@ -33,4 +39,5 @@ type Query {
   countries: [GqlCountry!]!
   fields: [GqlField!]!
   me: GqlUser!
+  specializationTopics(id: Float!, search: String): [GqlTopic!]!
 }
