@@ -21,16 +21,23 @@ type GqlField {
 type GqlGoal {
   actualEndDate: DateTime
   createdAt: DateTime!
-  estimatedEndDate: DateTime!
+  estimatedEndDate: DateTime
   id: Int!
   isActive: Boolean!
   milestones: [GqlMilestone!]!
   name: String!
-  startDate: DateTime!
+  startDate: DateTime
   topic: GqlTopic!
   topicId: Int!
   updatedAt: DateTime!
   userId: String!
+}
+
+type GqlGoalsResponse {
+  count: Int!
+  limit: Int!
+  list: [GqlGoal!]!
+  page: Int!
 }
 
 type GqlMilestone {
@@ -64,15 +71,18 @@ type GqlUser {
 }
 
 type Mutation {
+  createGoal(name: String!, specializationId: Int!, topicName: String!): GqlGoal!
+  deleteGoal(id: Int!): GqlGoal!
   login(email: String!, password: String!): String!
   signup(email: String!, password: String!): String!
+  updateGoal(id: Int!, name: String): GqlGoal!
 }
 
 type Query {
   countries: [GqlCountry!]!
   fields: [GqlField!]!
   goal(id: Int!): GqlGoal
-  goals(limit: Int, page: Int, topicId: Int, userId: String): [GqlGoal!]!
+  goals(limit: Int, page: Int, topicId: Int, userId: String): GqlGoalsResponse!
   me: GqlUser!
   milestone(id: Int!): GqlMilestone
   specializationTopics(id: Int!, search: String): [GqlTopic!]!

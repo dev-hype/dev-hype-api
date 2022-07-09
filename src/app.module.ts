@@ -9,10 +9,10 @@ import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { MiscModule } from './misc/misc.module'
 import { FieldModule } from './field/field.module'
+import { GoalModule } from './goal/goal.module'
+import { MilestoneModule } from './milestone/milestone.module'
 
 import { envSchema } from './env'
-import { GoalModule } from './goal/goal.module';
-import { MilestoneModule } from './milestone/milestone.module';
 
 @Module({
   imports: [

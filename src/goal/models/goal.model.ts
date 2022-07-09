@@ -11,10 +11,10 @@ export class GqlGoal {
   @Field()
   name: string
 
-  @Field(() => Date)
-  startDate: string
+  @Field(() => Date, { nullable: true })
+  startDate?: string
 
-  @Field(() => Date)
+  @Field(() => Date, { nullable: true })
   estimatedEndDate?: string
 
   @Field(() => Date, { nullable: true })

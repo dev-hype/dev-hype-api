@@ -11,7 +11,7 @@ export class AuthService {
     private userService: UserService,
   ) {}
 
-  private generateAccessToken(userId: string, expiresIn = '5m') {
+  private generateAccessToken(userId: string, expiresIn = '1w') {
     const token = this.jwtService.sign(
       {},
       {

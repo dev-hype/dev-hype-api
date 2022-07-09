@@ -84,7 +84,7 @@ CREATE TABLE "resourceTypes" (
 CREATE TABLE "goals" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "startDate" TIMESTAMP(3) NOT NULL,
+    "startDate" TIMESTAMP(3),
     "estimatedEndDate" TIMESTAMP(3),
     "actualEndDate" TIMESTAMP(3),
     "isActive" BOOLEAN NOT NULL DEFAULT false,

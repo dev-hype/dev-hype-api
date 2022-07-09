@@ -133,7 +133,7 @@ model Goal {
   id Int @id @default(autoincrement())
 
   name             String
-  startDate        DateTime
+  startDate        DateTime?
   estimatedEndDate DateTime?
   actualEndDate    DateTime?
   isActive         Boolean   @default(false)
