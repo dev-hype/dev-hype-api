@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql'
+import { Args, Int, Query, Resolver } from '@nestjs/graphql'
 
 import { FieldService } from './field.service'
 
@@ -16,7 +16,7 @@ export class FieldResolver {
 
   @Query(() => [GqlTopic])
   specializationTopics(
-    @Args('id') id: number,
+    @Args('id', { type: () => Int }) id: number,
     @Args('search', { nullable: true }) search?: string,
   ) {
     return this.fieldService.getSpecializationTopics(id, search)

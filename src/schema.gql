@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type GqlCountry {
   key: String!
   name: String!
@@ -11,6 +16,34 @@ type GqlField {
   id: Int!
   name: String!
   specializations: [GqlSpecialization!]!
+}
+
+type GqlGoal {
+  actualEndDate: DateTime
+  createdAt: DateTime!
+  estimatedEndDate: DateTime!
+  id: Int!
+  isActive: Boolean!
+  milestones: [GqlMilestone!]!
+  name: String!
+  startDate: DateTime!
+  topic: GqlTopic!
+  topicId: Int!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+type GqlMilestone {
+  actualEndDate: DateTime
+  createdAt: DateTime!
+  durationInHours: Int!
+  estimatedEndDate: DateTime!
+  goalId: Int!
+  id: Int!
+  isActive: Boolean!
+  name: String!
+  startDate: DateTime!
+  updatedAt: DateTime!
 }
 
 type GqlSpecialization {
@@ -38,6 +71,9 @@ type Mutation {
 type Query {
   countries: [GqlCountry!]!
   fields: [GqlField!]!
+  goal(id: Int!): GqlGoal
+  goals(limit: Int, page: Int, topicId: Int, userId: String): [GqlGoal!]!
   me: GqlUser!
-  specializationTopics(id: Float!, search: String): [GqlTopic!]!
+  milestone(id: Int!): GqlMilestone
+  specializationTopics(id: Int!, search: String): [GqlTopic!]!
 }

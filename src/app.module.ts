@@ -11,6 +11,8 @@ import { MiscModule } from './misc/misc.module'
 import { FieldModule } from './field/field.module'
 
 import { envSchema } from './env'
+import { GoalModule } from './goal/goal.module';
+import { MilestoneModule } from './milestone/milestone.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { envSchema } from './env'
     UserModule,
     MiscModule,
     FieldModule,
+    GoalModule,
+    MilestoneModule,
   ],
 })
 export class AppModule {}
