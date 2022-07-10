@@ -87,6 +87,7 @@ type Mutation {
   createGoal(name: String!, specializationId: Int!, topicName: String!): GqlGoal!
   createMilestone(estimatedEndDate: String!, goalId: Int!, name: String!, resource: CreateResourceDto!, schedules: [CreateMilestoneScheduleDto!]!, startDate: String!): GqlMilestone!
   deleteGoal(id: Int!): GqlGoal!
+  deleteMilestone(id: Int!): GqlMilestone!
   login(email: String!, password: String!): String!
   signup(email: String!, password: String!): String!
   updateGoal(id: Int!, name: String): GqlGoal!

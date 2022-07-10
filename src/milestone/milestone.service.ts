@@ -99,6 +99,10 @@ export class MilestoneService {
     })
   }
 
+  deleteMilestone(id: number) {
+    return this.prismaService.milestone.delete({ where: { id } })
+  }
+
   // private
 
   private getScheduleDuration({

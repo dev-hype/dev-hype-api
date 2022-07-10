@@ -32,4 +32,10 @@ export class MilestoneResolver {
   updateMilestone(@Args() args: UpdateMilestoneDto) {
     return this.milestoneService.updateMilestone(args)
   }
+
+  @Mutation(() => GqlMilestone)
+  @UseGuards(GqlJwtGuard, MilestoneExistsGuard, MilestoneOwnerGuard)
+  deleteMilestone(@Args('id', { type: () => Int }) id: number) {
+    return this.milestoneService.deleteMilestone(id)
+  }
 }
