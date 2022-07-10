@@ -2,6 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateMilestoneScheduleDto {
+  durationInHours: Int!
+  milestoneId: Int
+  weekDay: String!
+}
+
+input CreateResourceDto {
+  isFree: Boolean!
+  name: String!
+  typeId: Int!
+  url: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -72,6 +85,7 @@ type GqlUser {
 
 type Mutation {
   createGoal(name: String!, specializationId: Int!, topicName: String!): GqlGoal!
+  createMilestone(estimatedEndDate: String!, goalId: Int!, name: String!, resource: CreateResourceDto!, schedules: [CreateMilestoneScheduleDto!]!, startDate: String!): GqlMilestone!
   deleteGoal(id: Int!): GqlGoal!
   login(email: String!, password: String!): String!
   signup(email: String!, password: String!): String!

@@ -1,15 +1,26 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql'
+import { UseGuards } from '@nestjs/common'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 
 import { MilestoneService } from './milestone.service'
 
+import { GqlJwtGuard } from 'src/auth/guards/jwt.guard'
+
 import { GqlMilestone } from './models/milestone.model'
 
-@Resolver()
+import { CreateMilestoneDto } from './dto/create-milestone.dto'
+
+@Resolver(() => GqlMilestone)
 export class MilestoneResolver {
   constructor(private milestoneService: MilestoneService) {}
 
   @Query(() => GqlMilestone, { nullable: true })
   milestone(@Args('id', { type: () => Int }) id: number) {
     return this.milestoneService.getMilestoneById(id)
+  }
+
+  @Mutation(() => GqlMilestone)
+  @UseGuards(GqlJwtGuard)
+  createMilestone(@Args() args: CreateMilestoneDto) {
+    return this.milestoneService.createMilestone(args)
   }
 }

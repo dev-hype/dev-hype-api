@@ -11,6 +11,7 @@ import { MiscModule } from './misc/misc.module'
 import { FieldModule } from './field/field.module'
 import { GoalModule } from './goal/goal.module'
 import { MilestoneModule } from './milestone/milestone.module'
+import { ResourceModule } from './resource/resource.module'
 
 import { envSchema } from './env'
 
@@ -32,6 +33,7 @@ import { envSchema } from './env'
     FieldModule,
     GoalModule,
     MilestoneModule,
+    ResourceModule,
   ],
 })
 export class AppModule {}
