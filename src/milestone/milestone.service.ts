@@ -6,6 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service'
 
 import { CreateMilestoneDto } from './dto/create-milestone.dto'
 import { CreateMilestoneScheduleDto } from './dto/create-milestoneSchedule.dto'
+import { UpdateMilestoneDto } from './dto/update-milestone.dto'
 
 @Injectable()
 export class MilestoneService {
@@ -15,6 +16,7 @@ export class MilestoneService {
     return this.prismaService.milestone.findUnique({
       where: { id },
       include: {
+        goal: true,
         milestoneSchedules: true,
         milestonesNotes: true,
         resource: true,
@@ -49,6 +51,55 @@ export class MilestoneService {
       include: { goal: true },
     })
   }
+
+  async updateMilestone(data: UpdateMilestoneDto) {
+    const currentMilestone = await this.getMilestoneById(data.id)
+
+    let durationInHours = currentMilestone?.durationInHours
+
+    if (data.estimatedEndDate || data.schedules || data.startDate) {
+      durationInHours = this.getScheduleDuration({
+        schedules: data.schedules || currentMilestone?.milestoneSchedules,
+        endDate: data.estimatedEndDate
+          ? new Date(data.estimatedEndDate)
+          : new Date(currentMilestone.estimatedEndDate),
+        startDate: data.startDate
+          ? new Date(data.startDate)
+          : new Date(currentMilestone.startDate),
+      })
+    }
+
+    return this.prismaService.milestone.update({
+      where: { id: data.id },
+      data: {
+        ...(data.name ? { name: data.name } : {}),
+        ...(data.startDate ? { startDate: data.startDate } : {}),
+        ...(data.estimatedEndDate
+          ? { estimatedEndDate: data.estimatedEndDate }
+          : {}),
+        ...(data.estimatedEndDate
+          ? { estimatedEndDate: data.estimatedEndDate }
+          : {}),
+        ...(data.actualEndDate ? { actualEndDate: data.actualEndDate } : {}),
+        ...(data.resource
+          ? {
+              resource: {
+                connectOrCreate: {
+                  where: { name: data.resource.name },
+                  create: data.resource,
+                },
+              },
+            }
+          : {}),
+        ...(data.schedules
+          ? { milestoneSchedules: { createMany: { data: data.schedules } } }
+          : {}),
+        durationInHours,
+      },
+    })
+  }
+
+  // private
 
   private getScheduleDuration({
     schedules,
