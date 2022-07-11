@@ -1,7 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import * as argon2 from 'argon2'
 
+import { MailService } from 'src/mail/mail.service'
 import { UserService } from 'src/user/user.service'
 
 @Injectable()
@@ -9,16 +11,18 @@ export class AuthService {
   constructor(
     private jwtService: JwtService,
     private userService: UserService,
+    private mailService: MailService,
+    private configService: ConfigService,
   ) {}
 
-  private generateAccessToken(userId: string, expiresIn = '1w') {
+  private generateToken(subject: string, expiresIn = '1w') {
     const token = this.jwtService.sign(
       {},
       {
         expiresIn: expiresIn,
         audience: 'users',
         issuer: 'main',
-        subject: userId,
+        subject,
       },
     )
 
@@ -51,6 +55,8 @@ export class AuthService {
       password: hashedPassword,
     })
 
+    this.sendSignupVerificationEmail(email)
+
     return newUser
   }
 
@@ -61,10 +67,32 @@ export class AuthService {
       throw new BadRequestException('invalid credentials')
     }
 
-    const access_token = this.generateAccessToken(user.id)
+    const access_token = this.generateToken(user.id)
 
     return {
       access_token,
     }
+  }
+
+  async sendSignupVerificationEmail(email: string) {
+    const verificationToken = this.generateToken(email, '1h')
+    const frontendUrl = this.configService.get('FRONTEND_URL')
+
+    return this.mailService.send({
+      from: `info@dev-hype.com`,
+      to: email,
+      templateId: 'd-3fc962ea0ed34c5e8d421eb17a9253cf',
+      dynamicTemplateData: {
+        verify_url: `${frontendUrl}/verify/${verificationToken}`,
+      },
+    })
+  }
+
+  async verifyEmailByToken(token: string) {
+    const { sub: email } = this.jwtService.verify(token)
+
+    const user = await this.userService.verifyEmail(email)
+
+    return this.generateToken(user.id)
   }
 }

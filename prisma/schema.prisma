@@ -34,6 +34,7 @@ model User {
   githubId  String?  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  verified  Boolean  @default(false)
 
   profile Profile?
 
@@ -53,7 +54,7 @@ model Profile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   countryCode String?
-  country     Country? @relation(fields: [countryCode], references: [key])
+  country     Country? @relation(fields: [countryCode], references: [key], onDelete: Restrict)
 
   @@map("profiles")
 }
@@ -85,7 +86,7 @@ model Specialization {
   name String @unique
 
   fieldId Int
-  field   Field @relation(fields: [fieldId], references: [id])
+  field   Field @relation(fields: [fieldId], references: [id], onDelete: Restrict)
 
   topics Topic[]
 
@@ -98,7 +99,7 @@ model Topic {
   name String
 
   specializationId Int
-  specialization   Specialization @relation(fields: [specializationId], references: [id])
+  specialization   Specialization @relation(fields: [specializationId], references: [id], onDelete: Restrict)
 
   goals Goal[]
 
@@ -114,7 +115,7 @@ model Resource {
   isFree Boolean
 
   typeId Int
-  type   ResourceType @relation(fields: [typeId], references: [id])
+  type   ResourceType @relation(fields: [typeId], references: [id], onDelete: Restrict)
 
   milestones Milestone[]
 
@@ -145,7 +146,7 @@ model Goal {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   topicId Int
-  topic   Topic @relation(fields: [topicId], references: [id])
+  topic   Topic @relation(fields: [topicId], references: [id], onDelete: Restrict)
 
   milestones Milestone[]
   projects   Project[]
@@ -168,7 +169,7 @@ model Milestone {
   goalId     Int
   goal       Goal     @relation(fields: [goalId], references: [id], onDelete: Cascade)
   resourceId Int
-  resource   Resource @relation(fields: [resourceId], references: [id])
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Restrict)
 
   milestoneSchedules MilestoneSchedule[]
   milestonesNotes    MilestoneNote[]

@@ -9,6 +9,7 @@ CREATE TABLE "users" (
     "githubId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "verified" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -182,7 +183,7 @@ CREATE UNIQUE INDEX "resourceTypes_name_key" ON "resourceTypes"("name");
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "profiles" ADD CONSTRAINT "profiles_countryCode_fkey" FOREIGN KEY ("countryCode") REFERENCES "countries"("key") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_countryCode_fkey" FOREIGN KEY ("countryCode") REFERENCES "countries"("key") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "specializations" ADD CONSTRAINT "specializations_fieldId_fkey" FOREIGN KEY ("fieldId") REFERENCES "fields"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

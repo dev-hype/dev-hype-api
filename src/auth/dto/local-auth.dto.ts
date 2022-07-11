@@ -1,5 +1,4 @@
 import { ArgsType, Field } from '@nestjs/graphql'
-import { Expose } from 'class-transformer'
 import {
   IsDefined,
   IsEmail,
@@ -11,13 +10,11 @@ import {
 
 @ArgsType()
 export class LocalAuthDto {
-  @Expose()
   @IsEmail({}, { message: 'Invalid email address' })
   @IsDefined({ message: 'Email is required' })
   @Field()
   email!: string
 
-  @Expose()
   @IsString({ message: 'Invalid password' })
   @IsDefined({ message: 'Password is required' })
   @MinLength(8, { message: 'Password must be at least 8 characters' })

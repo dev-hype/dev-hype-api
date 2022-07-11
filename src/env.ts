@@ -14,4 +14,7 @@ export const envSchema = Joi.object({
   JWT_SECRET: Joi.string().required(),
   // GITHUB_AUTH_CLIENT_ID: Joi.string().required(),
   // GITHUB_AUTH_CLIENT_SECRET: Joi.string().required(),
+
+  // Email
+  SENDGRID_API_KEY: Joi.string().required(),
 })
