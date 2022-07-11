@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common'
+import { Cron, CronExpression } from '@nestjs/schedule'
 import RRule, { Weekday } from 'rrule'
-import { WeekDay } from '@prisma/client'
+import {
+  Goal,
+  Milestone,
+  MilestoneSchedule,
+  User,
+  WeekDay,
+} from '@prisma/client'
 
 import { PrismaService } from 'src/prisma/prisma.service'
 
@@ -155,5 +162,46 @@ export class MilestoneService {
       default:
         return RRule.SU
     }
+  }
+
+  private dayNumToWeekDay(dayNum: number): WeekDay {
+    switch (dayNum) {
+      case 1:
+        return WeekDay.Mon
+      case 2:
+        return WeekDay.Tue
+      case 3:
+        return WeekDay.Wed
+      case 4:
+        return WeekDay.Thu
+      case 5:
+        return WeekDay.Fri
+      case 6:
+        return WeekDay.Sat
+      default:
+        return WeekDay.Sun
+    }
+  }
+
+  async getMilestoneSchedule(milestone: Milestone & {}) {}
+
+  // Cron tasks
+  @Cron(CronExpression.EVERY_MINUTE, {
+    name: 'milestoneTasksReminderCron',
+    timeZone: 'UTC',
+  })
+  async milestoneTasksReminderCron() {
+    const milestonesByUser = await this.prismaService.milestone.groupBy({
+      by: ['goalId'],
+      where: {
+        milestoneSchedules: {
+          some: {
+            weekDay: {
+              equals: this.dayNumToWeekDay(new Date().getUTCDay()),
+            },
+          },
+        },
+      },
+    })
   }
 }

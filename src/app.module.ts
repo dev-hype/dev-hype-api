@@ -2,6 +2,7 @@ import { join } from 'path'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
+import { ScheduleModule } from '@nestjs/schedule'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
 import { PrismaModule } from './prisma/prisma.module'
@@ -27,6 +28,7 @@ import { envSchema } from './env'
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
+    ScheduleModule.forRoot(),
     PrismaModule,
     AuthModule,
     UserModule,

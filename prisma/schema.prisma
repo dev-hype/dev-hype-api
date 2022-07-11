@@ -38,7 +38,7 @@ model User {
 
   profile Profile?
 
-  Goal Goal[]
+  goals Goal[]
   @@map("users")
 }
 
