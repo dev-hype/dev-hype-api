@@ -12,6 +12,7 @@ import { FieldModule } from './field/field.module'
 import { GoalModule } from './goal/goal.module'
 import { MilestoneModule } from './milestone/milestone.module'
 import { ResourceModule } from './resource/resource.module'
+import { MailModule } from './mail/mail.module'
 
 import { envSchema } from './env'
 
@@ -34,6 +35,7 @@ import { envSchema } from './env'
     GoalModule,
     MilestoneModule,
     ResourceModule,
+    MailModule,
   ],
 })
 export class AppModule {}

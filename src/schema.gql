@@ -89,9 +89,11 @@ type Mutation {
   deleteGoal(id: Int!): GqlGoal!
   deleteMilestone(id: Int!): GqlMilestone!
   login(email: String!, password: String!): String!
+  sendverificationEmail(email: String!): String!
   signup(email: String!, password: String!): String!
   updateGoal(id: Int!, name: String): GqlGoal!
   updateMilestone(estimatedEndDate: DateTime, id: Int!, name: String, resource: CreateResourceDto, schedules: [CreateMilestoneScheduleDto!], startDate: DateTime): GqlMilestone!
+  verifyEmail(token: String!): String!
 }
 
 type Query {

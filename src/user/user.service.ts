@@ -32,4 +32,17 @@ export class UserService {
       include: { profile: true },
     })
   }
+
+  async deleteUser(id: string) {
+    return this.prisma.user.delete({
+      where: { id },
+    })
+  }
+
+  async verifyEmail(email: string) {
+    return this.prisma.user.update({
+      where: { email },
+      data: { verified: true },
+    })
+  }
 }
