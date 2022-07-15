@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 import * as countriesJSON from './seed-data/countries.json'
+import * as timezonesJSON from './seed-data/timezones.json'
 import * as fieldsJSON from './seed-data/fields.json'
 import * as specializationsJSON from './seed-data/specializations.json'
 import * as topicsJSON from './seed-data/topics.json'
@@ -11,6 +12,9 @@ const prisma = new PrismaClient()
 async function main() {
   // countries
   await prisma.country.createMany({ data: countriesJSON })
+
+  // timezones
+  await prisma.timezone.createMany({ data: timezonesJSON })
 
   // fields
   fieldsJSON.forEach(async (field) => {

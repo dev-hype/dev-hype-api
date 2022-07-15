@@ -23,6 +23,7 @@ CREATE TABLE "profiles" (
     "avatar" TEXT,
     "userId" TEXT NOT NULL,
     "countryCode" TEXT,
+    "timezoneName" TEXT NOT NULL,
 
     CONSTRAINT "profiles_pkey" PRIMARY KEY ("id")
 );
@@ -34,6 +35,15 @@ CREATE TABLE "countries" (
     "key" TEXT NOT NULL,
 
     CONSTRAINT "countries_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "timezones" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "offset" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "timezones_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -165,6 +175,9 @@ CREATE UNIQUE INDEX "countries_name_key" ON "countries"("name");
 CREATE UNIQUE INDEX "countries_key_key" ON "countries"("key");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "timezones_name_key" ON "timezones"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "fields_name_key" ON "fields"("name");
 
 -- CreateIndex
@@ -184,6 +197,9 @@ ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userI
 
 -- AddForeignKey
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_countryCode_fkey" FOREIGN KEY ("countryCode") REFERENCES "countries"("key") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_timezoneName_fkey" FOREIGN KEY ("timezoneName") REFERENCES "timezones"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "specializations" ADD CONSTRAINT "specializations_fieldId_fkey" FOREIGN KEY ("fieldId") REFERENCES "fields"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

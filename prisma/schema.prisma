@@ -56,6 +56,9 @@ model Profile {
   countryCode String?
   country     Country? @relation(fields: [countryCode], references: [key], onDelete: Restrict)
 
+  timezone     Timezone @relation(fields: [timezoneName], references: [name])
+  timezoneName String
+
   @@map("profiles")
 }
 
@@ -68,6 +71,17 @@ model Country {
   profiles Profile[]
 
   @@map("countries")
+}
+
+model Timezone {
+  id Int @id @default(autoincrement())
+
+  name   String @unique
+  offset Float
+
+  profiles Profile[]
+
+  @@map("timezones")
 }
 
 model Field {
