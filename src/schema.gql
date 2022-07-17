@@ -66,6 +66,17 @@ type GqlMilestone {
   updatedAt: DateTime!
 }
 
+type GqlProfile {
+  avatar: String
+  bio: String
+  countryCode: String!
+  firstName: String!
+  id: String!
+  lastName: String!
+  timezoneName: String!
+  userId: String!
+}
+
 type GqlSpecialization {
   fieldId: Int!
   id: Int!
@@ -86,8 +97,10 @@ type GqlUser {
 type Mutation {
   createGoal(name: String!, specializationId: Int!, topicName: String!): GqlGoal!
   createMilestone(estimatedEndDate: String!, goalId: Int!, name: String!, resource: CreateResourceDto!, schedules: [CreateMilestoneScheduleDto!]!, startDate: String!): GqlMilestone!
+  createProfile(avatar: String, bio: String, countryCode: String!, firstName: String!, lastName: String!, timezoneName: String): GqlProfile!
   deleteGoal(id: Int!): GqlGoal!
   deleteMilestone(id: Int!): GqlMilestone!
+  editProfile(avatar: String, bio: String, countryCode: String, firstName: String, lastName: String, timezoneName: String): GqlProfile!
   login(email: String!, password: String!): String!
   sendverificationEmail(email: String!): String!
   signup(email: String!, password: String!): String!

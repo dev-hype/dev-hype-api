@@ -56,8 +56,8 @@ model Profile {
   countryCode String?
   country     Country? @relation(fields: [countryCode], references: [key], onDelete: Restrict)
 
-  timezone     Timezone @relation(fields: [timezoneName], references: [name])
-  timezoneName String
+  timezone     Timezone? @relation(fields: [timezoneName], references: [name])
+  timezoneName String?
 
   @@map("profiles")
 }
