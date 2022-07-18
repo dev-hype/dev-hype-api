@@ -22,7 +22,11 @@ export class UserService {
   async getUserWithProfile(userWherUniqueInput: Prisma.UserWhereUniqueInput) {
     return this.prisma.user.findUnique({
       where: userWherUniqueInput,
-      include: { profile: true },
+      include: {
+        profile: {
+          include: { country: true },
+        },
+      },
     })
   }
 

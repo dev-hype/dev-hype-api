@@ -5,7 +5,7 @@
 input CreateMilestoneScheduleDto {
   durationInHours: Int!
   milestoneId: Int
-  weekDay: String!
+  weekDay: WeekDay!
 }
 
 input CreateResourceDto {
@@ -69,6 +69,7 @@ type GqlMilestone {
 type GqlProfile {
   avatar: String
   bio: String
+  country: GqlCountry!
   countryCode: String!
   firstName: String!
   id: String!
@@ -77,21 +78,34 @@ type GqlProfile {
   userId: String!
 }
 
+type GqlResourceType {
+  id: Int!
+  name: String!
+}
+
 type GqlSpecialization {
   fieldId: Int!
   id: Int!
   name: String!
 }
 
+type GqlTimezone {
+  id: Int!
+  name: String!
+  offset: Float!
+}
+
 type GqlTopic {
   id: Int!
   name: String!
+  specialization: GqlSpecialization!
   specializationId: Int!
 }
 
 type GqlUser {
   email: String!
   id: String!
+  profile: GqlProfile
 }
 
 type Mutation {
@@ -116,5 +130,18 @@ type Query {
   goals(limit: Int, page: Int, topicId: Int, userId: String): GqlGoalsResponse!
   me: GqlUser!
   milestone(id: Int!): GqlMilestone
+  profile(userId: String!): GqlProfile
+  resourceTypes: [GqlResourceType!]!
   specializationTopics(id: Int!, search: String): [GqlTopic!]!
+  timezones: [GqlTimezone!]!
+}
+
+enum WeekDay {
+  Fri
+  Mon
+  Sat
+  Sun
+  Thu
+  Tue
+  Wed
 }
