@@ -9,13 +9,14 @@ import {
 } from 'class-validator'
 
 import { WeekDay } from '@prisma/client'
+import { GqlWeekDay } from 'src/common/models/weekday.model'
 
 @InputType()
 export class CreateMilestoneScheduleDto {
   @IsString({ message: 'Invalid weekday' })
   @IsDefined({ message: 'WeekDay is required' })
   @IsEnum(WeekDay)
-  @Field()
+  @Field(() => GqlWeekDay)
   weekDay: WeekDay
 
   @IsInt({ message: 'Invalid Duration' })

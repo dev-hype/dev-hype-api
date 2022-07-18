@@ -1,5 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 
+import { GqlCountry } from 'src/misc/models/country.model'
+
 @ObjectType()
 export class GqlProfile {
   @Field()
@@ -22,6 +24,9 @@ export class GqlProfile {
 
   @Field()
   countryCode: string
+
+  @Field(() => GqlCountry)
+  country: GqlCountry
 
   @Field()
   timezoneName: string

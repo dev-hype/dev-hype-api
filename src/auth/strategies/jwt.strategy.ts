@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   async validate(payload: any, done: VerifiedCallback) {
     const userId = payload.sub
 
-    const user = await this.userService.getUserById(userId)
+    const user = await this.userService.getUserWithProfile({ id: userId })
 
     if (user) {
       return done(null, user)

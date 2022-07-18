@@ -32,9 +32,9 @@ export class GqlMilestone {
   @Field(() => Int)
   goalId: number
 
-  // resourceId Int
-  // resource   Resource @relation(fields: [resourceId], references: [id])
+  // resourceId: number
+  // resource: GqlResource
 
-  // milestoneSchedules MilestoneSchedule[]
+  // milestoneSchedules: GqlMilestoneSchedule[]
   // milestonesNotes    MilestoneNote[]
 }
