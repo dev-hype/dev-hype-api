@@ -26,7 +26,9 @@ async function main() {
         name: field.name,
       },
       update: {},
-      where: {},
+      where: {
+        name: field.name,
+      },
     })
 
     // specializations
@@ -38,7 +40,9 @@ async function main() {
             field: { connect: { id: createdField.id } },
           },
           update: {},
-          where: {},
+          where: {
+            name: spec.name,
+          },
           include: { field: true },
         })
 
@@ -53,7 +57,12 @@ async function main() {
                 },
               },
               update: {},
-              where: {},
+              where: {
+                name_specializationId: {
+                  name: topic.name,
+                  specializationId: createdSpec.id,
+                },
+              },
               include: { specialization: { include: { field: true } } },
             })
           },
