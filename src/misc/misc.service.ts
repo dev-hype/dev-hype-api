@@ -9,4 +9,8 @@ export class MiscService {
   getCountries() {
     return this.prismaService.country.findMany()
   }
+
+  getTimezones() {
+    return this.prismaService.timezone.findMany()
+  }
 }

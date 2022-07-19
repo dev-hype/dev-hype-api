@@ -1,7 +1,7 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
 
-import { User } from '@prisma/client'
+import { Profile, User } from '@prisma/client'
 
 import { ProfileService } from './profile.service'
 
@@ -19,10 +19,15 @@ import { EditProfileDto } from './dto/edit-profile.dto'
 export class UserResolver {
   constructor(private profileService: ProfileService) {}
 
-  @Query(() => GqlUser, { name: 'me' })
+  @Query(() => GqlUser)
   @UseGuards(GqlJwtGuard)
-  me(@CurrentUser() user: User) {
+  me(@CurrentUser() user: User & { profile?: Profile }) {
     return user
+  }
+
+  @Query(() => GqlProfile, { nullable: true })
+  profile(@Args('userId') userId: string) {
+    return this.profileService.getProfileByUserId(userId)
   }
 
   @Mutation(() => GqlProfile)

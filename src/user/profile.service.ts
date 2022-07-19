@@ -9,6 +9,13 @@ import { EditProfileDto } from './dto/edit-profile.dto'
 export class ProfileService {
   constructor(private prisma: PrismaService) {}
 
+  getProfileByUserId(userId: string) {
+    return this.prisma.profile.findUnique({
+      where: { userId },
+      include: { country: true },
+    })
+  }
+
   createProfile(userId: string, data: CreateProfileDto) {
     const { countryCode, timezoneName, ...restData } = data
 
@@ -31,6 +38,7 @@ export class ProfileService {
           },
         },
       },
+      include: { country: true },
     })
   }
 
@@ -63,6 +71,7 @@ export class ProfileService {
             }
           : {}),
       },
+      include: { country: true },
     })
   }
 }

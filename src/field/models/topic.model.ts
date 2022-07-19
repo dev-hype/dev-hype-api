@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { GqlSpecialization } from './specialization.model'
 
 @ObjectType()
 export class GqlTopic {
@@ -10,4 +11,7 @@ export class GqlTopic {
 
   @Field(() => Int)
   specializationId: number
+
+  @Field(() => GqlSpecialization)
+  specialization: GqlSpecialization
 }
