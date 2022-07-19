@@ -11,40 +11,49 @@ const prisma = new PrismaClient()
 
 async function main() {
   // countries
-  await prisma.country.createMany({ data: countriesJSON })
+  await prisma.country.createMany({ data: countriesJSON, skipDuplicates: true })
 
   // timezones
-  await prisma.timezone.createMany({ data: timezonesJSON })
+  await prisma.timezone.createMany({
+    data: timezonesJSON,
+    skipDuplicates: true,
+  })
 
   // fields
   fieldsJSON.forEach(async (field) => {
-    const createdField = await prisma.field.create({
-      data: {
+    const createdField = await prisma.field.upsert({
+      create: {
         name: field.name,
       },
+      update: {},
+      where: {},
     })
 
     // specializations
     specializationsJSON[field.name as keyof typeof specializationsJSON].forEach(
       async (spec) => {
-        const createdSpec = await prisma.specialization.create({
-          data: {
+        const createdSpec = await prisma.specialization.upsert({
+          create: {
             name: spec.name,
             field: { connect: { id: createdField.id } },
           },
+          update: {},
+          where: {},
           include: { field: true },
         })
 
         // topics
         topicsJSON[spec.name as keyof typeof topicsJSON].forEach(
           async (topic) => {
-            await prisma.topic.create({
-              data: {
+            await prisma.topic.upsert({
+              create: {
                 name: topic.name,
                 specialization: {
                   connect: { id: createdSpec.id },
                 },
               },
+              update: {},
+              where: {},
               include: { specialization: { include: { field: true } } },
             })
           },
@@ -54,7 +63,10 @@ async function main() {
   })
 
   // resource types
-  await prisma.resourceType.createMany({ data: resourceTypesJSON })
+  await prisma.resourceType.createMany({
+    data: resourceTypesJSON,
+    skipDuplicates: true,
+  })
 }
 
 main()
