@@ -15,10 +15,10 @@ export class FieldResolver {
   }
 
   @Query(() => [GqlTopic])
-  specializationTopics(
-    @Args('id', { type: () => Int }) id: number,
+  topics(
+    @Args('specializationId', { type: () => Int, nullable: true }) id: number,
     @Args('search', { nullable: true }) search?: string,
   ) {
-    return this.fieldService.getSpecializationTopics(id, search)
+    return this.fieldService.getTopics(id, search)
   }
 }

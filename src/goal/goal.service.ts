@@ -20,7 +20,11 @@ export class GoalService {
       include: {
         milestones: {
           include: {
-            resource: true,
+            resource: {
+              include: {
+                type: true,
+              },
+            },
             milestoneSchedules: true,
           },
         },
@@ -48,7 +52,11 @@ export class GoalService {
       include: {
         milestones: {
           include: {
-            resource: true,
+            resource: {
+              include: {
+                type: true,
+              },
+            },
             milestoneSchedules: true,
           },
         },
@@ -84,7 +92,14 @@ export class GoalService {
       },
       include: {
         milestones: {
-          include: { resource: true },
+          include: {
+            milestoneSchedules: true,
+            resource: {
+              include: {
+                type: true,
+              },
+            },
+          },
         },
         projects: true,
         topic: {
@@ -110,7 +125,14 @@ export class GoalService {
       },
       include: {
         milestones: {
-          include: { resource: true },
+          include: {
+            milestoneSchedules: true,
+            resource: {
+              include: {
+                type: true,
+              },
+            },
+          },
         },
         projects: true,
         topic: {

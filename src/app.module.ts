@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
@@ -22,10 +22,16 @@ import { envSchema } from './env'
       isGlobal: true,
       validationSchema: envSchema,
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
+      useFactory: async (configService: ConfigService) => ({
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        sortSchema: true,
+        cors: {
+          origin: [configService.get('FRONTEND_URL')],
+        },
+      }),
+      inject: [ConfigService],
     }),
     PrismaModule,
     AuthModule,

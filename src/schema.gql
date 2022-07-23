@@ -61,9 +61,18 @@ type GqlMilestone {
   goalId: Int!
   id: Int!
   isActive: Boolean!
+  milestoneSchedules: [GqlMilestoneSchedule!]!
   name: String!
+  resource: GqlResource!
+  resourceId: Int!
   startDate: DateTime!
   updatedAt: DateTime!
+}
+
+type GqlMilestoneSchedule {
+  durationInHours: Int!
+  id: Int!
+  weekDay: WeekDay!
 }
 
 type GqlProfile {
@@ -76,6 +85,15 @@ type GqlProfile {
   lastName: String!
   timezoneName: String!
   userId: String!
+}
+
+type GqlResource {
+  id: Int!
+  isFree: Boolean!
+  name: String!
+  type: GqlResourceType!
+  typeId: Int!
+  url: String!
 }
 
 type GqlResourceType {
@@ -132,8 +150,8 @@ type Query {
   milestone(id: Int!): GqlMilestone
   profile(userId: String!): GqlProfile
   resourceTypes: [GqlResourceType!]!
-  specializationTopics(id: Int!, search: String): [GqlTopic!]!
   timezones: [GqlTimezone!]!
+  topics(search: String, specializationId: Int): [GqlTopic!]!
 }
 
 enum WeekDay {

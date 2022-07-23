@@ -12,14 +12,18 @@ export class FieldService {
     })
   }
 
-  async getSpecializationTopics(id: number, search?: string) {
+  async getTopics(specializationId?: number, search?: string) {
     return this.prismaService.topic.findMany({
       where: {
-        specializationId: id,
+        specializationId: specializationId,
         ...(search
           ? { name: { mode: 'insensitive', contains: search.toLowerCase() } }
           : {}),
       },
+      include: {
+        specialization: true,
+      },
+      take: 10,
     })
   }
 }

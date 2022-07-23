@@ -1,5 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
 
+import { GqlMilestoneSchedule } from './milestone-schedule.model'
+import { GqlResource } from 'src/resource/models/resource.model'
+
 @ObjectType()
 export class GqlMilestone {
   @Field(() => Int)
@@ -32,9 +35,13 @@ export class GqlMilestone {
   @Field(() => Int)
   goalId: number
 
-  // resourceId: number
-  // resource: GqlResource
+  @Field(() => Int)
+  resourceId: number
 
-  // milestoneSchedules: GqlMilestoneSchedule[]
+  @Field(() => GqlResource)
+  resource: GqlResource
+
+  @Field(() => [GqlMilestoneSchedule])
+  milestoneSchedules: GqlMilestoneSchedule[]
   // milestonesNotes    MilestoneNote[]
 }
