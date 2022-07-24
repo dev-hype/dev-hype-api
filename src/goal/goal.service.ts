@@ -149,4 +149,26 @@ export class GoalService {
       where: { id },
     })
   }
+
+  async updateGoalDates(id: number) {
+    const minStartDate = await this.prismaService.milestone.aggregate({
+      where: { goalId: id },
+      _min: {
+        startDate: true,
+      },
+    })
+
+    const maxEndDate = await this.prismaService.milestone.aggregate({
+      where: { goalId: id },
+      _max: {
+        estimatedEndDate: true,
+      },
+    })
+
+    return this.updateGoal({
+      id,
+      startDate: minStartDate._min.startDate.toISOString(),
+      estimatedEndDate: maxEndDate._max.estimatedEndDate.toISOString(),
+    })
+  }
 }

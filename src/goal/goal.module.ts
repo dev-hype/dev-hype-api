@@ -5,5 +5,6 @@ import { GoalResolver } from './goal.resolver'
 
 @Module({
   providers: [GoalService, GoalResolver],
+  exports: [GoalService],
 })
 export class GoalModule {}

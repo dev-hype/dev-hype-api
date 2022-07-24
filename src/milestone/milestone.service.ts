@@ -3,6 +3,7 @@ import RRule, { Weekday } from 'rrule'
 import { WeekDay } from '@prisma/client'
 
 import { PrismaService } from 'src/prisma/prisma.service'
+import { GoalService } from 'src/goal/goal.service'
 
 import { CreateMilestoneDto } from './dto/create-milestone.dto'
 import { CreateMilestoneScheduleDto } from './dto/create-milestoneSchedule.dto'
@@ -10,7 +11,10 @@ import { UpdateMilestoneDto } from './dto/update-milestone.dto'
 
 @Injectable()
 export class MilestoneService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(
+    private prismaService: PrismaService,
+    private goalService: GoalService,
+  ) {}
 
   getMilestoneById(id: number) {
     return this.prismaService.milestone.findUnique({
@@ -24,7 +28,7 @@ export class MilestoneService {
     })
   }
 
-  createMilestone(data: CreateMilestoneDto) {
+  async createMilestone(data: CreateMilestoneDto) {
     const { resource, schedules, ...milestone } = data
 
     const durationInHours = this.getScheduleDuration({
@@ -33,7 +37,7 @@ export class MilestoneService {
       startDate: new Date(milestone.startDate),
     })
 
-    return this.prismaService.milestone.create({
+    const createdMilestone = await this.prismaService.milestone.create({
       data: {
         name: milestone.name,
         startDate: milestone.startDate,
@@ -50,12 +54,17 @@ export class MilestoneService {
       },
       include: { goal: true },
     })
+
+    await this.goalService.updateGoalDates(milestone.goalId)
+
+    return createdMilestone
   }
 
   async updateMilestone(data: UpdateMilestoneDto) {
     const currentMilestone = await this.getMilestoneById(data.id)
 
     let durationInHours = currentMilestone?.durationInHours
+    let shouldUpdateGoalDates = false
 
     if (data.estimatedEndDate || data.schedules || data.startDate) {
       durationInHours = this.getScheduleDuration({
@@ -67,9 +76,11 @@ export class MilestoneService {
           ? new Date(data.startDate)
           : new Date(currentMilestone.startDate),
       })
+
+      shouldUpdateGoalDates = true
     }
 
-    return this.prismaService.milestone.update({
+    const updatedMilestone = await this.prismaService.milestone.update({
       where: { id: data.id },
       data: {
         ...(data.name ? { name: data.name } : {}),
@@ -97,6 +108,12 @@ export class MilestoneService {
         durationInHours,
       },
     })
+
+    if (shouldUpdateGoalDates) {
+      await this.goalService.updateGoalDates(currentMilestone.goal.id)
+    }
+
+    return updatedMilestone
   }
 
   deleteMilestone(id: number) {
