@@ -4,15 +4,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 
-import { PrismaModule } from './prisma/prisma.module'
 import { AuthModule } from './auth/auth.module'
-import { UserModule } from './user/user.module'
-import { MiscModule } from './misc/misc.module'
 import { FieldModule } from './field/field.module'
+import { FileUploadModule } from './file-upload/file-upload.module'
 import { GoalModule } from './goal/goal.module'
-import { MilestoneModule } from './milestone/milestone.module'
-import { ResourceModule } from './resource/resource.module'
 import { MailModule } from './mail/mail.module'
+import { MilestoneModule } from './milestone/milestone.module'
+import { MiscModule } from './misc/misc.module'
+import { PrismaModule } from './prisma/prisma.module'
+import { ResourceModule } from './resource/resource.module'
+import { UserModule } from './user/user.module'
 
 import { envSchema } from './env'
 
@@ -33,15 +34,16 @@ import { envSchema } from './env'
       }),
       inject: [ConfigService],
     }),
-    PrismaModule,
     AuthModule,
-    UserModule,
-    MiscModule,
     FieldModule,
+    FileUploadModule,
     GoalModule,
-    MilestoneModule,
-    ResourceModule,
     MailModule,
+    MilestoneModule,
+    MiscModule,
+    ResourceModule,
+    PrismaModule,
+    UserModule,
   ],
 })
 export class AppModule {}

@@ -23,7 +23,7 @@ CREATE TABLE "profiles" (
     "avatar" TEXT,
     "userId" TEXT NOT NULL,
     "countryCode" TEXT,
-    "timezoneName" TEXT NOT NULL,
+    "timezoneName" TEXT,
 
     CONSTRAINT "profiles_pkey" PRIMARY KEY ("id")
 );
@@ -199,7 +199,7 @@ ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userI
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_countryCode_fkey" FOREIGN KEY ("countryCode") REFERENCES "countries"("key") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "profiles" ADD CONSTRAINT "profiles_timezoneName_fkey" FOREIGN KEY ("timezoneName") REFERENCES "timezones"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_timezoneName_fkey" FOREIGN KEY ("timezoneName") REFERENCES "timezones"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "specializations" ADD CONSTRAINT "specializations_fieldId_fkey" FOREIGN KEY ("fieldId") REFERENCES "fields"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

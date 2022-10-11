@@ -17,4 +17,9 @@ export const envSchema = Joi.object({
 
   // Email
   SENDGRID_API_KEY: Joi.string().required(),
+
+  // Storage
+  S3_BUCKET: Joi.string().required(),
+  S3_BUCKET_ACCESS_KEY: Joi.string().required(),
+  S3_BUCKET_SECRET_KEY: Joi.string().required(),
 })

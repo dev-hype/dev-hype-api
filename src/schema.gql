@@ -150,6 +150,7 @@ type Query {
   milestone(id: Int!): GqlMilestone
   profile(userId: String!): GqlProfile
   resourceTypes: [GqlResourceType!]!
+  s3PresignedUrl(filename: String!): String!
   timezones: [GqlTimezone!]!
   topics(search: String, specializationId: Int): [GqlTopic!]!
 }
